@@ -1,70 +1,100 @@
-# Getting Started with Create React App
+# Rating and Review App (`ShopReview`)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A clean, realistic e-commerce product detail and customer reviews application built with React.
 
-## Available Scripts
+This project showcases how a modern online storefront presents product details, calculates real-time customer rating distributions, and handles interactive customer reviews on a single product page (**Wireless Headphones**).
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **E-Commerce Product Detail Showcase**
+  - Sticky `ShopReview` storefront header with quick navigation and live review keyword search.
+  - Semantic breadcrumb navigation (`Home > Electronics > Headphones`).
+  - Responsive 2-column desktop / stacked mobile product layout with a high-resolution studio product photograph (plus an automatic vector illustration fallback if offline), technical specifications strip, feature checklist, pricing, and trust badges.
+- **Dynamic Customer Review Summary**
+  - Real-time calculation of the overall average star rating (`4.4 out of 5` initially) and total review count directly from the review state.
+  - Interactive 5-star to 1-star rating breakdown with proportional progress bars, percentages, and review counts. Clicking any star bar filters the review list below.
+- **Interactive Review Cards**
+  - Customer avatar with auto-generated initials, customer name, formatted review date, star rating, review title, and full review text.
+  - Conditional **Verified purchase** badge displayed only on demo reviews explicitly marked as verified.
+  - **Helpful** vote toggle button with a thumbs-up icon and live count that increments on click and removes the vote when clicked again.
+- **Sorting & Multi-Faceted Filtering**
+  - Filter reviews by star rating (`All`, `5 ★`, `4 ★`, `3 ★`, `2 ★`, `1 ★`) via either the filter pills or the rating summary bars.
+  - Filter reviews by keyword using the header search input.
+  - Sort reviews by **Most Recent**, **Highest Rating**, or **Most Helpful**.
+  - One-click **Clear filter** control and a helpful empty state when no reviews match the active criteria.
+- **Accessible "Write a Review" Modal Form**
+  - Clickable and keyboard-accessible (`ArrowLeft` / `ArrowRight` / `Home` / `End`) 1–5 star rating selector with live descriptive labels (`Poor` to `Excellent`).
+  - Required field validation for star rating, review headline, and review description, plus an optional display name field (defaults to `Anonymous Customer`).
+  - Immediate list update, live recalculation of average rating and star distribution bars, confirmation banner, and `Escape` / backdrop-click support.
+- **LocalStorage Persistence**
+  - Submitted reviews and helpful-vote toggles are safely persisted in `localStorage` so changes survive page refreshes.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## Technologies Used
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **React 18** (Functional Components, `useState`, `useEffect`, `useMemo`, `useRef`)
+- **JavaScript (ES6+)**
+- **CSS3** (Custom properties, CSS Grid, Flexbox, responsive media queries, accessible focus states)
+- **React Icons (`react-icons/fi`)** & custom SVG star icons with fractional fill support
+- **Create React App (`react-scripts`)**
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Project Structure
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```text
+src/
+├── components/
+│   ├── shared/
+│   │   └── Button.jsx        # Reusable button component (primary, outline, ghost)
+│   ├── Header.jsx            # Storefront header with logo, links, and review search
+│   ├── ProductInfo.jsx       # Breadcrumbs, product gallery, specs, features, and CTAs
+│   ├── RatingSummary.jsx     # Calculated average rating and 5-to-1 star progress bars
+│   ├── ReviewCard.jsx        # Individual customer review item with Helpful toggle
+│   ├── ReviewForm.jsx        # Accessible modal form to submit a new 1–5 star review
+│   ├── ReviewList.jsx        # Star filter pills, sort selector, empty state, and list
+│   └── StarRating.jsx        # Read-only fractional star display & interactive radio group
+├── data/
+│   └── ProductData.js        # Demo product data and initial sample customer reviews
+├── utils/
+│   └── reviews.js            # Pure rating calculation, sort/filter, and safe LocalStorage helpers
+├── App.js                    # Root state management and page layout
+├── index.css                 # Storefront design system and responsive styles
+└── index.js                  # Application entry point
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## Setup & Installation
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. **Clone the repository and navigate to the project directory:**
+   ```bash
+   cd feedback-app
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. **Start the development server:**
+   ```bash
+   npm start
+   ```
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+4. **Create a production build:**
+   ```bash
+   npm run build
+   ```
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Known Demo Limitations
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **Single-Product Scope:** Designed intentionally around one flagship demo product (`Wireless Headphones`) to focus on the customer review UX rather than multi-page cart/checkout flows.
+- **Browser-Local Storage:** Reviews and helpful votes are stored in the visitor's browser via `localStorage` (`shopreview_product_reviews_v1` and `shopreview_helpful_votes_v1`). Clearing browser site data resets the reviews back to the initial 8 sample reviews.
+- **No Backend or Authentication:** Newly submitted reviews do not require user login and are not marked with the `Verified purchase` badge (which is reserved for verified records in the initial dataset).
